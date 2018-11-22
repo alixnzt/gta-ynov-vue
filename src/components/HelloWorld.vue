@@ -1,7 +1,9 @@
 <template>
     <div class="hello">
+        <nav-bar></nav-bar>
         <h1>This is homepage</h1>
         <h2>{{msg}}</h2>
+        <a href="/">login</a>
     </div>
 </template>
 

@@ -99,12 +99,7 @@
                                 this.$router.push(this.$route.params.nextUrl)
                             }
                             else{
-                                if(this.role == 'Director' || 'HR'){
-                                    this.$router.push('/admin')
-                                }
-                                else {
-                                    this.$router.push('/dashboard')
-                                }
+                                this.$router.push('/')
                             }
                         }
                     })

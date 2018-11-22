@@ -54,12 +54,22 @@
                                 this.$router.push(this.$route.params.nextUrl)
                             }
                             else {
-                                if(role === 'Director' || 'HR'){
-                                    this.$router.push('admin')
-                                }
-                                else if(role === 'Employe'){
-                                    this.$router.push('dashboard')
-                                }
+                                switch (this.role) {
+                                            case "Director":
+                                                console.log('Director')
+                                                this.$router.push('admindashboard')
+                                                break
+                                            case "HR":
+                                                console.log('HR')
+                                                this.$router.push('admindashboard')
+                                                break
+                                            case "Employe":
+                                                console.log("Employe")
+                                                this.$router.push('employedashboard')
+                                                break
+                                            default:
+                                                break
+                                        }
                             }
                         }
                     })
