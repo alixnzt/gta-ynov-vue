@@ -21,6 +21,10 @@ Création d'une application de gestion des temps pour une entreprise.
 (souhaité)
 - terminé les étapes précédentes
 
+22-11-2018 :
+- déployer api + front
+- avancer sur le planning
+
 ## Build Setup
 
 ``` bash
