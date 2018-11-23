@@ -1,24 +1,28 @@
 <template>
     <div>
         <nav-bar></nav-bar>
-        <h1>Employe</h1>
-        This is your dashboard
-        <calendar style="height: 800px;"
-            :calendars="calendarList"
-            :schedules="scheduleList"
-            :view="view"
-            :taskView="taskView"
-            :scheduleView="scheduleView"
-            :theme="theme"
-            :week="week"
-            :month="month"
-            :timezones="timezones"
-            :disableDblClick="disableDblClick"
-            :isReadOnly="isReadOnly"
-            :template="template"
-            :useCreationPopup="useCreationPopup"
-            :useDetailPopup="useDetailPopup"/>
-
+        <br>
+        <h1>My dashboard</h1>
+        <br>
+        <hr>
+        <h2>My contract</h2>
+        <b-container>
+            <b-row>
+                <!-- Affichage des contrats -->
+            </b-row>
+        </b-container>
+        <hr>
+        <h2>My requests</h2>
+        <b-container>
+            <b-row>
+                <b-card v-for="userRequest in userRequests" v-bind:key="userRequest.id" class="mb-2">
+                    <h3 class="reason-card">{{userRequest.reason}}</h3>
+                    <p class="card-text">Request type : {{userRequest.type}}</p>
+                    <p class="date-card">Date begin : {{formatDisplayDate(userRequest.dateBegin)}}</p>
+                    <p class="date-card">Date end : {{formatDisplayDate(userRequest.dateBegin)}}</p>
+                </b-card>
+            </b-row>
+        </b-container>
         <router-view></router-view>
     </div>
 </template>
@@ -27,104 +31,44 @@
     import NavBar from '@/components/NavBar'
     import 'tui-calendar/dist/tui-calendar.css'
     import { Calendar } from '@toast-ui/vue-calendar'
+    import moment from 'moment'
 
     export default {
         components: {
             NavBar,
             'calendar': Calendar,
         },
-        // mounted() {
-        //     let user = JSON.parse(localStorage.getItem('user'))
-        //     let userId = user.id
-        //     this.$http.post('http://localhost:3000/create-event',{
-        //         userId: userId,
-        //     })
-        //         .then(response => {
-        //             localStorage.setItem('planning', JSON.stringify(response.data.calendar))
-        //             response.data.calendar.forEach(event => {
-        //                 let event = {
-        //                     id: event.id,
-        //                     calendarId: event.id,
-        //                     title: event.category,
-        //                     category: 'category',
-        //                     dueDateClass: '',
-        //                     start: event.dateBegin,
-        //                     end: event.dateEnd
-        //                 }
-        //                 this.scheduleList.push(event)
-        //         });
-        //     })
-        // },
         data () {
             return {
-                calendarList: [
-                    {
-                        id: '0',
-                        name: 'home'
-                    },
-                    {
-                        id: '1',
-                        name: 'office'
-                    }
-                ],
-                scheduleList: [
-                    {
-                        id: '1',
-                        calendarId: '1',
-                        title: 'event 1',
-                        category: 'time',
-                        dueDateClass: '2018-11-22T12:30:00+01:00',
-                        start: '2018-11-22T12:30:00+01:00',
-                        end: '2018-10-22T13:30:00+01:00'
-                    },
-                    {
-                        id: '2',
-                        calendarId: '1',
-                        title: 'event 2',
-                        category: 'time',
-                        dueDateClass: '',
-                        start: '2018-11-23T16:30:00+01:00',
-                        end: '2018-10-23T17:30:00+01:00'
-                    }
-                ],
-                view: 'month',
-                taskView: true,
-                scheduleView: ['time'],
-                theme: {
-                    'month.dayname.height': '30px',
-                    'month.dayname.borderLeft': '1px solid #ff0000',
-                    'month.dayname.textAlign': 'center',
-                    'week.today.color': '#333',
-                    'week.daygridLeft.width': '100px',
-                    'week.timegridLeft.width': '100px'
-                },
-                week: {
-                    narrowWeekend: true,
-                    showTimezoneCollapseButton: true,
-                    timezonesCollapsed: false
-                },
-                month: {
-                    visibleWeeksCount: 6,
-                    startDayOfWeek: 1
-                },
-                timezones: [{
-                    timezoneOffset: 60,
-                    displayLabel: 'GMT+01:00',
-                    tooltip: 'Paris'
-                }],
-                disableDblClick: true,
-                isReadOnly: false,
-                template: {
-                    milestone: function(schedule) {
-                        return `<span style="color:red;">${schedule.title}</span>`;
-                    },
-                    milestoneTitle: function() {
-                        return 'Milestone';
-                    },
-                },
-                useCreationPopup: true,
-                useDetailPopup: true,
+                userId: '',
+                userRequests: [],
             }
+        },
+        mounted() {
+            this.user = JSON.parse(localStorage.getItem('user'));
+            this.retrieveRequests();
+        },
+        methods: {
+            retrieveRequests(){
+                let urlDev = 'http://localhost:3000/employe-requests';
+                let urlProd = '';
+                
+                this.userRequests = [];
+                let userId = this.user.id;
+                let status = 'waiting';
+                this.$http.post(urlDev, {
+                    userId: userId,
+                    status: status,
+                })
+                    .then(response => {
+                        response.data.request.forEach(request => {
+                            this.userRequests.push(request)
+                        });
+                    })
+            },
+            formatDisplayDate(date) {
+                return moment(date).format('DD-MM-YYYY à hh:mm:ss');
+            },
         }
     }
 </script>
@@ -144,5 +88,12 @@
     }
     a {
         color: #42b983;
+    }
+    .reason-card {
+        color: #1266e6;
+    }
+    .date-card {
+        font-weight: bold;
+        color: #888888;
     }
 </style>

@@ -4,6 +4,8 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import EmployeDashBoard from '@/components/EmployeDashBoard'
 import AdminDashBoard from '@/components/AdminDashBoard'
+import UserProfile from '@/components/UserProfile'
+import UserRequest from '@/components/UserRequest'
 
 Vue.use(Router)
 
@@ -24,22 +26,30 @@ let router = new Router({
           component: Register,
           meta: {
             role: 'HR' || "Director",
-            guest: true
           }
       },
       {
-          path: '/dashboard',
-          name: 'employedashboard',
-          component: EmployeDashBoard,
-        //   children: [
-        //         {
-        //             path: 'profile',
-        //             name: 'profile',
-        //             component: UserProfile
-        //         }
-        //   ],
+        path: '/dashboard',
+        name: 'employedashboard',
+        component: EmployeDashBoard,
+        meta: { 
+            requiresAuth: true
+        }
+      },
+      {   
+          path: '/profile',
+          name: 'profile',
+          component: UserProfile,
           meta: { 
-              requiresAuth: true
+            requiresAuth: true
+          }
+      },
+      {
+          path: '/request',
+          name: 'request',
+          component: UserRequest,
+          meta: { 
+            requiresAuth: true
           }
       },
       {
@@ -63,9 +73,7 @@ router.beforeEach((to, from, next) => {
       } else {
           let user = JSON.parse(localStorage.getItem('user'))
           if(to.matched.some(record => record.meta.role)) {
-            console.log(user.role)  
             if(user.role == 'HR' || 'Director'){
-                console.log(user.role)
                 next({ name: 'admindashboard'})
             }
             else{
