@@ -22,8 +22,12 @@ Création d'une application de gestion des temps pour une entreprise.
 - terminé les étapes précédentes
 
 22-11-2018 :
-- déployer api + front
+- déployer api + front (hébergé, mais problème de rooting)
 - avancer sur le planning
+
+23-11-2018 :
+- avancer sur le planning 
+- réglé les problèmes de rooting
 
 ## Lien vers l'hebergement
 lien back : https://dashboard.heroku.com/apps/gta-ynov-server
