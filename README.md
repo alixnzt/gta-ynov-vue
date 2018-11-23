@@ -25,6 +25,20 @@ Création d'une application de gestion des temps pour une entreprise.
 - déployer api + front
 - avancer sur le planning
 
+## Lien vers l'hebergement
+lien back : https://dashboard.heroku.com/apps/gta-ynov-server
+lien front : https://gta-ynov-vue-app.herokuapp.com/
+
+```
+login : alixnzt@gmail.com
+mdp : azertyuiop
+role : employe
+-------------------------
+login : maxrolland@gmail.com
+mdp : azertyuiop
+role : director
+```
+
 ## Build Setup
 
 ``` bash
