@@ -33,6 +33,28 @@
             NavBar,
             'calendar': Calendar,
         },
+        // mounted() {
+        //     let user = JSON.parse(localStorage.getItem('user'))
+        //     let userId = user.id
+        //     this.$http.post('http://localhost:3000/create-event',{
+        //         userId: userId,
+        //     })
+        //         .then(response => {
+        //             localStorage.setItem('planning', JSON.stringify(response.data.calendar))
+        //             response.data.calendar.forEach(event => {
+        //                 let event = {
+        //                     id: event.id,
+        //                     calendarId: event.id,
+        //                     title: event.category,
+        //                     category: 'category',
+        //                     dueDateClass: '',
+        //                     start: event.dateBegin,
+        //                     end: event.dateEnd
+        //                 }
+        //                 this.scheduleList.push(event)
+        //         });
+        //     })
+        // },
         data () {
             return {
                 calendarList: [
@@ -65,7 +87,7 @@
                         end: '2018-10-23T17:30:00+01:00'
                     }
                 ],
-                view: 'week',
+                view: 'month',
                 taskView: true,
                 scheduleView: ['time'],
                 theme: {

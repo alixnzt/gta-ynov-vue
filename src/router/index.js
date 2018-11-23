@@ -16,7 +16,7 @@ let router = new Router({
           component: Login,
           meta: { 
             guest: true
-        }
+          }
       },
       {
           path: '/register',
@@ -31,6 +31,13 @@ let router = new Router({
           path: '/dashboard',
           name: 'employedashboard',
           component: EmployeDashBoard,
+        //   children: [
+        //         {
+        //             path: 'profile',
+        //             name: 'profile',
+        //             component: UserProfile
+        //         }
+        //   ],
           meta: { 
               requiresAuth: true
           }
@@ -41,7 +48,6 @@ let router = new Router({
           component: AdminDashBoard,
           meta: { 
               requiresAuth: true,
-              role: 'HR' || "Director"
           }
       },
   ]
@@ -57,24 +63,21 @@ router.beforeEach((to, from, next) => {
       } else {
           let user = JSON.parse(localStorage.getItem('user'))
           if(to.matched.some(record => record.meta.role)) {
-              if(user.role == 'HR'||'Director'){
-                  next()
-              }
-              else{
-                  next({ name: 'employedashboard'})
-              }
-          }else {
+            console.log(user.role)  
+            if(user.role == 'HR' || 'Director'){
+                console.log(user.role)
+                next({ name: 'admindashboard'})
+            }
+            else{
+                next({ name: 'employedashboard'})
+            }
+          }
+          else {
               next()
           }
       }
-  } else if(to.matched.some(record => record.meta.guest)) {
-      if(localStorage.getItem('jwt') == null){
-          next()
-      }
-      else{
-          next({ name: 'employedashboard'})
-      }
-  }else {
+  } 
+  else {
       next() 
   }
 })

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+console.log('test')
     export default {
         data(){
             return {
@@ -44,6 +45,7 @@
                         password: this.password
                     })
                     .then(response => {
+                        console.log(response.data.user)
                         let role = response.data.user.role
                         localStorage.setItem('user',JSON.stringify(response.data.user))
                         localStorage.setItem('jwt',response.data.token)
@@ -54,18 +56,18 @@
                                 this.$router.push(this.$route.params.nextUrl)
                             }
                             else {
-                                switch (this.role) {
+                                switch (role) {
                                             case "Director":
                                                 console.log('Director')
-                                                this.$router.push('admindashboard')
+                                                this.$router.push('admin')
                                                 break
                                             case "HR":
                                                 console.log('HR')
-                                                this.$router.push('admindashboard')
+                                                this.$router.push('admin')
                                                 break
                                             case "Employe":
                                                 console.log("Employe")
-                                                this.$router.push('employedashboard')
+                                                this.$router.push('dashboard')
                                                 break
                                             default:
                                                 break
