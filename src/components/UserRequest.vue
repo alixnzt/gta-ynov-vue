@@ -86,10 +86,10 @@ export default {
     methods : {
         handleSubmit(e){
             let urlDev = 'http://localhost:3000/create-request';
-            let urlProd = '';
-            
+            let urlProd = 'https://gta-ynov-server.herokuapp.com/create-request';
+
             e.preventDefault()
-            this.$http.post(urlDev, {
+            this.$http.post(urlProd, {
                 dateBegin: this.form.dateBegin,
                 dateEnd: this.form.dateEnd,
                 reason: this.form.reason,

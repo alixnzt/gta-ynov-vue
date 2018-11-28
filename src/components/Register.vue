@@ -86,12 +86,12 @@
         methods : {
             handleSubmit(e) {
                 let urlDev = 'http://localhost:3000/register';
-                let urlProd = '';
+                let urlProd = 'https://gta-ynov-server.herokuapp.com/register';
 
                 e.preventDefault()
                 if (this.password === this.password_confirmation && this.password.length > 0)
                 {
-                    this.$http.post(urlDev, {
+                    this.$http.post(urlProd, {
                         name: this.name,
                         email: this.email,
                         password: this.password,

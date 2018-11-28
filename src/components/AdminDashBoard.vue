@@ -56,11 +56,11 @@
         methods: {
             retrieveEmployees() {
                 let urlDev = 'http://localhost:3000/retrieve-employees';
-                let urlProd = '';
+                let urlProd = 'https://gta-ynov-server.herokuapp.com/retrieve-employees';
 
                 this.employees = [];
                 let directorId = this.director.id;
-                this.$http.post(urlDev, {
+                this.$http.post(urlProd, {
                     directorId: directorId,
                 })
                     .then(response => {
@@ -72,11 +72,11 @@
             },
             retrieveEmployeRequests() {
                 let urlDev = 'http://localhost:3000/employees-requests';
-                let urlProd = '';
+                let urlProd = 'https://gta-ynov-server.herokuapp.com/employees-requests';
 
                 this.employeesRequests = [];
                 let directorId = this.director.id;
-                this.$http.post(urlDev, {
+                this.$http.post(urlProd, {
                     directorId: directorId,
                 })
                     .then(response => {
@@ -87,9 +87,9 @@
             },
             manageRequest(request, requestId, manage) {
                 let urlDev = 'http://localhost:3000/manageRequests';
-                let urlProd = '';
+                let urlProd = 'https://gta-ynov-server.herokuapp.com/manageRequests';
 
-                this.$http.post(urlDev, {
+                this.$http.post(urlProd, {
                     requestId: requestId,
                     manage: manage,
                 })

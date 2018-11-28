@@ -51,12 +51,12 @@
         methods: {
             retrieveRequests(){
                 let urlDev = 'http://localhost:3000/employe-requests';
-                let urlProd = '';
+                let urlProd = 'https://gta-ynov-server.herokuapp.com/employe-requests';
                 
                 this.userRequests = [];
                 let userId = this.user.id;
                 let status = 'waiting';
-                this.$http.post(urlDev, {
+                this.$http.post(urlProd, {
                     userId: userId,
                     status: status,
                 })

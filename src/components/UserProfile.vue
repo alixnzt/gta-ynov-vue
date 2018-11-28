@@ -95,7 +95,6 @@
         data() {
             return {
                 userProfile:'',
-                userId: '',
                 form: {
                     firstname: '',
                     lastname: '',
@@ -109,35 +108,32 @@
             }
         },
         mounted() {
+            let urlDev = 'http://localhost:3000/profile';
+            let urlProd = 'https://gta-ynov-server.herokuapp.com/profile';
+
             let user = JSON.parse(localStorage.getItem('user'));
-            this.retrieveProfile();
+            let userId = user.id;
+            this.form.email = user.email;
+            this.$http.post(urlProd, {
+                userId: userId,
+            })
+                .then(response => {
+                    localStorage.setItem('profile', JSON.stringify(response.data.userProfile));
+                    this.form.firstname = response.data.userProfile.firstname;
+                    this.form.lastname = response.data.userProfile.lastname;
+                    this.form.birthdate = response.data.userProfile.birthdate;
+                    this.form.phone = response.data.userProfile.phone;
+                    this.form.address = response.data.userProfile.address;
+                    this.form.postalCode = response.data.userProfile.postalCode;
+                    this.form.city = response.data.userProfile.city;
+                })
         },
         methods: {
-            retrieveProfile() {
-                let urlDev = 'http://localhost:3000/profile';
-                let urlProd = '';
-
-                let userId = this.user.id;
-                this.form.email = user.email;
-                this.$http.post(urlDev, {
-                    userId: userId,
-                })
-                    .then(response => {
-                        localStorage.setItem('profile', JSON.stringify(response.data.userProfile));
-                        this.form.firstname = response.data.userProfile.firstname;
-                        this.form.lastname = response.data.userProfile.lastname;
-                        this.form.birthdate = response.data.userProfile.birthdate;
-                        this.form.phone = response.data.userProfile.phone;
-                        this.form.address = response.data.userProfile.address;
-                        this.form.postalCode = response.data.userProfile.postalCode;
-                        this.form.city = response.data.userProfile.city;
-                    })
-            },
+        
         }
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>

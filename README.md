@@ -6,44 +6,42 @@
 Création d'une application de gestion des temps pour une entreprise.
 
 ## Gestion du projet
-08-11-2018 :
 (souhaité)
-- conception api le back (réalisé)
-- conception pages de login + register (register ok / login (mauvaise redirections))
-- hébergement sur héroku (en cours)
+- gestion de contrats (calcule des temps de travail,...)
+- visualisation des contrats et demandes à partir d'un calendrier
+- modification du profil utilisateur (employé)
 
-15-11-2018 :
-(souhaité)
-- terminé les étapes précédentes
-- fonctionnalité d'agenda
-
-16-11-2018 :
-(souhaité)
-- terminé les étapes précédentes
-
-22-11-2018 :
-- déployer api + front (hébergé, mais problème de rooting)
-- avancer sur le planning
-
-23-11-2018 :
-- avancer sur le planning 
-- réglé les problèmes de rooting
+(réalisé)
+- création d'une API (back)
+- système de login (selon les roles)
+- visualisation du profil utilisateur
+- visualisation des dashboards (employé et responsable équipe)
+- création d'utilisateur (pour le responsable d'équipe)
+- création de "demande employé" (congé, récupération, ...)
+- visualisation des "demandes employé" (pour l'employé en question)
+- visualisation des "demandes employé" (pour le responsable d'équipe)
+- validation des "demandes employé" pour les employés de son équipe
+- visualisation de son équipe (pour le responable d'équipe)
 
 ## Lien vers l'hebergement
-lien back : https://dashboard.heroku.com/apps/gta-ynov-server
-lien front : https://gta-ynov-vue-app.herokuapp.com/
+- lien back : https://gta-ynov-server.herokuapp.com/
+- lien front : https://gta-ynov-vue-app.herokuapp.com/
 
 ```
-login : alixnzt@gmail.com
-mdp : azertyuiop
+login : employe1@gmail.com
+mdp : azerty
 role : employe
 -------------------------
-login : maxrolland@gmail.com
-mdp : azertyuiop
+login : director1@gmail.com
+mdp : azerty
 role : director
+-------------------------
+login : hr1@gmail.com
+mdp : azerty
+role : HR
 ```
 
-## Build Setup
+## Local Setup
 
 ``` bash
 # install dependencies
@@ -55,6 +53,6 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# serve for production at localhost:5000
+npm start
 ```

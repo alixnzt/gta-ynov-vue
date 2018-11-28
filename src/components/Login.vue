@@ -39,11 +39,11 @@ console.log('test')
         methods : {
             handleSubmit(e){
                 let urlDev = 'http://localhost:3000/login';
-                let urlProd = '';
+                let urlProd = 'https://gta-ynov-server.herokuapp.com/login';
 
                 e.preventDefault()
                 if (this.password.length > 0) {
-                    this.$http.post(urlDev, {
+                    this.$http.post(urlProd, {
                         email: this.email,
                         password: this.password
                     })
